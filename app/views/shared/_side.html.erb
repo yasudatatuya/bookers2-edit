@@ -13,6 +13,24 @@
     	            <th>introduction</th>
     	            <th><%= user.introduction %></th>
     	        </tr>
+
+    	        <tr>
+    	            <th>followers</th>
+    	            <th>
+    	                <%= link_to followers_user_path(user) do %>
+    	                    <%= user.followers.count %>
+    	                <% end %>
+    	            </th>
+    	        </tr>
+
+    	        <tr>
+    	            <th>following</th>
+    	            <th>
+    	                <%= link_to following_user_path(user) do %>
+    	                    <%= user.followings.count %>
+    	                <% end %>
+    	            </th>
+    	        </tr>
     	    </tbody>
     </table>
 
@@ -21,11 +39,14 @@
             <%= link_to edit_user_path(user) do %>
                 <div class="col-xs-12 btn btn-default glyphicon glyphicon-wrench"></div>
             <% end %>
-
         <% else %>
-            <%= link_to user_path(current_user) do %>
-                <div class="col-xs-12 btn btn-default glyphicon glyphicon-wrench"></div>
+        <div id="follow_form">
+            <% if current_user.following?(user) %>
+                <%= render 'unfollow' %>
+            <% else %>
+                <%= render 'follow' %>
             <% end %>
+        </div>
         <% end %>
     </div>
 

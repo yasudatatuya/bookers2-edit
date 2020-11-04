@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to:'home#top'
   resources :users, only: [:show, :index, :edit, :update] do
     member do
-      det :following, :followers
+      get :following, :followers
       end
     end
   resources :relationships, only: [:create, :destroy]
